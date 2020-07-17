@@ -1,0 +1,37 @@
+{
+  "name": "@scripty/articles",
+  "version": "0.1.6",
+  "author": "Danijel Garic",
+  "license": "MIT",
+  "description": "authentication wrapper for passport local strategy.",
+  "homepage": "https://garic.biz",
+  "keywords": [
+    "authentication",
+    "auth",
+    "passport",
+    "mongoose",
+    "node"
+  ],
+  "extension": "js",
+  "main": "src/index.js",
+  "repository": "https://github.com/scripty08/modules",
+  "scripts": {
+    "start": "nodemon --no-warnings --es-module-specifier-resolution=node ./examples/server.js"
+  },
+  "dependencies": {
+    "@scripty/logger": "^0.1.0"
+  },
+  "devDependencies": {
+    "@scripty/mongo": "^0.6.0",
+    "@scripty/server": "^0.3.4",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*"
+    ],
+    "legacyWatch": true
+  },
+  "type": "module"
+}

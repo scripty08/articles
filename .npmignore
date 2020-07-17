@@ -1,0 +1,9 @@
+.idea/
+build/
+.babelrc
+.editorconfig
+.gitignore
+.npmrc
+.serverc
+Dockerfile
+.env
