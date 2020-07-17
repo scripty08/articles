@@ -1,9 +1,8 @@
-import { MODULES_RESPONSE } from './Constants';
+import { READ, UPDATE, DESTROY } from './Constants';
 
 export class Presenter {
-    constructor(response, schema) {
+    constructor(response) {
         this.response = response;
-        this.schema = schema;
     }
 
     async present(interactorResponse) {
@@ -11,7 +10,21 @@ export class Presenter {
         const response = interactorResponse.response;
 
         switch (code) {
-            case MODULES_RESPONSE:
+            case READ:
+                this.response.send({
+                    entries: [{
+                        ...response,
+                    }]
+                });
+                break;
+            case UPDATE:
+                this.response.send({
+                    entries: [{
+                        ...response,
+                    }]
+                });
+                break;
+            case DESTROY:
                 this.response.send({
                     entries: [{
                         ...response,
@@ -21,15 +34,7 @@ export class Presenter {
         }
     };
 
-    filter(response) {
-        let merged = {};
-        Object.keys(this.schema).forEach((key) => {
-            merged[key] = response._doc[key];
-        });
-        return merged;
-    }
-
-    presentError(error) {
-        this.response.send(error);
+    presentError(code, error) {
+        this.response.status(code).send(error);
     };
 }

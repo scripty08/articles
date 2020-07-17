@@ -1,5 +1,6 @@
 import { BaseRepository } from './BaseRepository';
 import { Logger } from '@scripty/logger/src/Logger';
+import { DESTROY, READ, UPDATE } from './Constants';
 
 export class Repository extends BaseRepository {
 
@@ -7,15 +8,17 @@ export class Repository extends BaseRepository {
         super(Schema, db, collection);
     }
 
-    async read(query) {
+    async read(query, presenter) {
         try {
-            await this.model.find(query);
+            const response = await this.model.find(query);
+            presenter.present({code: READ, response: response});
         } catch (e) {
             Logger.error(e);
+            presenter.presentError(500, 'could not read');
         }
     };
 
-    async update(query) {
+    async update(query, presenter) {
         let { _id, title, html } = query;
 
         if (!_id) {
@@ -23,7 +26,7 @@ export class Repository extends BaseRepository {
         }
 
         try {
-            await this.model.findOneAndUpdate(
+            const response = await this.model.findOneAndUpdate(
                 { _id },
                 {
                     $set: {
@@ -33,17 +36,23 @@ export class Repository extends BaseRepository {
                 },
                 { new: true, upsert: true }
             );
+
+            presenter.present({code: UPDATE, response: response});
+
         } catch (e) {
             Logger.error(e);
+            presenter.presentError(500, 'could not update');
         }
     }
 
-    async destroy(query) {
+    async destroy(query, presenter) {
         let { _id } = query;
         try {
-            await this.model.findByIdAndRemove(_id);
+            const response = await this.model.findByIdAndRemove(_id);
+            presenter.present({code: DESTROY, response: response});
         } catch (e) {
             Logger.error(e);
+            presenter.presentError(500, 'could not destroy');
         }
     }
 }

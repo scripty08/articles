@@ -1,4 +1,5 @@
 export const Schema = {
     title: String,
-    html: Object
+    html: String,
+    category: String
 };

@@ -1,15 +1,13 @@
 {
   "name": "@scripty/articles",
-  "version": "0.1.6",
+  "version": "0.1.0",
   "author": "Danijel Garic",
   "license": "MIT",
   "description": "authentication wrapper for passport local strategy.",
   "homepage": "https://garic.biz",
   "keywords": [
-    "authentication",
-    "auth",
-    "passport",
-    "mongoose",
+    "articles",
+    "article",
     "node"
   ],
   "extension": "js",

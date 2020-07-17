@@ -1,1 +1,3 @@
-export const MODULES_RESPONSE = 'MODULES_RESPONSE';
+export const READ = 'READ';
+export const UPDATE = 'UPDATE';
+export const DESTROY = 'DESTROY';
